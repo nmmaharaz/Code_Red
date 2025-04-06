@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState, ChangeEvent, useRef } from "react";
 import { toast } from "react-toastify";
+import { useGroupData } from "./index";
 
 interface Friend {
   name: string;
@@ -21,6 +22,7 @@ function CreateCammunity() {
   const [selectedFriends, setSelectedFriends] = useState<string[]>([]);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const { data } = useSession();
+  const {refetch} = useGroupData("http://localhost:3000/api/community")
   //  Group Photo
   const dropzoneRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -185,6 +187,7 @@ function CreateCammunity() {
     console.log(newCommunity, "newCommunity");
     if (newCommunity.status === 201) {
       document.getElementById("create_group")?.close();
+      refetch()
       toast.success(newCommunity?.data.message);
     } else {
       toast.error("Error creating community");

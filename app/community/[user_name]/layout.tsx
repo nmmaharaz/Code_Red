@@ -1,11 +1,13 @@
 import "../../globals.css"
+import GroupHeader from "./Component/GroupHeader";
 export default function DashboardLayout({
     children,
   }: {
     children: React.ReactNode;
   }) {
     return (
-      <div className="dashboard-layout bg-white shadow-lg p-6">
+      <div className="bg-none">
+        <GroupHeader></GroupHeader>
         {children}
       </div>
     );

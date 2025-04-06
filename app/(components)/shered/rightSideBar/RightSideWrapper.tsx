@@ -5,7 +5,12 @@ import RightSideBar from "./component/RightSideBar"
 
 function RightSideWrapper() {
     const pathname = usePathname()
-    if(!(pathname === "/deshboard" || pathname === "/login" || pathname === "/signup" || pathname === "/community")) {return <RightSideBar></RightSideBar>}
+    const hiddenPaths = ["/dashboard", "/login", "/signup", "/community"]
+    const hide = hiddenPaths.some(path=>pathname === path || pathname.startsWith("/community"))
+    if (!hide) {
+        return <RightSideBar />
+    }
+
 }
 
 export default RightSideWrapper

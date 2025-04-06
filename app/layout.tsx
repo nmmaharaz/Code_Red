@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
-import AuthProvider from "./provider";
+import AuthProvider from "./provider/provider";
 import NavbarWrapper from "./(components)/shered/NavbarWrapper";
 import LeftSideBarWrapper from "./(components)/shered/leftSideBar/LeftSideBarWrapper";
 import Container from "./(components)/shered/Container";
 import RightSideWrapper from "./(components)/shered/rightSideBar/RightSideWrapper";
+import QueryProvider from "./provider/query-provider";
 
 // import { SessionProvider } from "next-auth/react";
 
@@ -38,8 +39,9 @@ export default function RootLayout({
         className={`!bg-[#f3f4f6] ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
        <AuthProvider>
-       <NavbarWrapper></NavbarWrapper>
-         <Container className="flex flex-row gap-4">
+      <QueryProvider>
+      <NavbarWrapper></NavbarWrapper>
+         <Container className="flex mt-4 flex-row gap-4">
          <LeftSideBarWrapper></LeftSideBarWrapper>
          <div className="w-full">
          <main>{children}</main>
@@ -47,6 +49,7 @@ export default function RootLayout({
          <RightSideWrapper></RightSideWrapper>
          </Container>
           <ToastContainer />
+      </QueryProvider>
         </AuthProvider>
       </body>
     </html>
