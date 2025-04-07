@@ -21,11 +21,10 @@ export async function POST(
     return NextResponse.json({ message: "User not found" }, { status: 404 });
   {
 
-    console.log(userData, "userData");
     const groupMemberCollection = await dbConnect(
       collectionObj.groupMemberCollection
     );
-    await groupMemberCollection.insertOne({user_name, member: userData.user_name, accessibility: "Owner"})
+    await groupMemberCollection.insertOne({user_name, member: userData.name, accessibility: "Owner"})
     members.map(async (member) => {
       await groupMemberCollection.insertOne({
         user_name,
@@ -50,3 +49,13 @@ export async function POST(
     { status: 201 }
   );
 }
+
+export async function GET(req:Request,{ params }: { params: { email: string } } ){
+  const {email} =await params                    // from dynamic route
+  const path = req.headers.get("path") || req.nextUrl.searchParams.get("path")
+  const userCollection = await dbConnect(collectionObj.userCollection)
+  const userInfo = await userCollection.findOne({email})
+  const groupMemberCollection = await dbConnect(collectionObj.groupMemberCollection)
+  const result = await groupMemberCollection.findOne({member:userInfo?.name, user_name:path})
+  return NextResponse.json(result)
+  }

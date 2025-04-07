@@ -1,11 +1,18 @@
-import PostInputCard from "./component/PostInputCard"
+// "use client"
+import GroupAboutCard from "./component/GroupAboutCard"
+import GroupPostLeftSideBar from "./component/GroupPostLeftSideBar"
 
-function page() {
+function GroupPostPage() {
   return (
-    <div>
-        <PostInputCard></PostInputCard>
+    <div className="flex gap-4">
+        <div className="w-4/6">
+            <GroupPostLeftSideBar></GroupPostLeftSideBar>
+        </div>
+        <div className="w-2/6">
+            <GroupAboutCard></GroupAboutCard>
+        </div>
     </div>
   )
 }
 
-export default page
+export default GroupPostPage

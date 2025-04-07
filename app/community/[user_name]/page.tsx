@@ -1,4 +1,3 @@
-
 interface PageProps {
   params: {
     user_name: string;
@@ -6,7 +5,5 @@ interface PageProps {
 }
 
 export default function CommunityPage({ params }: PageProps) {
-  return <div>
-    
-  </div>;
+  return <div></div>;
 }

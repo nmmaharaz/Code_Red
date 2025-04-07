@@ -4,12 +4,11 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState, ChangeEvent, useRef } from "react";
 import { toast } from "react-toastify";
-import { useGroupData } from "./index";
+import { useGroupData } from "../[user_name]/Member/component/index";
 
 interface Friend {
   name: string;
   email?: string;
-  [key: string]: any; // in case there are other properties
 }
 
 function CreateCammunity() {
